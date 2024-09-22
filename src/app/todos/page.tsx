@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function Home() {
+export default async function Todos() {
   // [ISSUE]
   // Hard Coded Base URL / Config Envs
   // Not Centralized Library Initialization
@@ -8,6 +8,10 @@ export default async function Home() {
   // Duplicated date formatting logic in every component
   const response = await axios.get(
     `https://jsonplaceholder.typicode.com/users/1`
+  );
+
+  const todosResponse = await axios.get(
+    `https://jsonplaceholder.typicode.com/todos`
   );
 
   const userData = response.data;
@@ -19,7 +23,8 @@ export default async function Home() {
 
   return (
     <div>
-      User {userData.name} Data Fetched on {formattedDate}{" "}
+      {todosResponse.data.length} Todos fetched by {userData.name} on{" "}
+      {formattedDate}{" "}
     </div>
   );
 }
