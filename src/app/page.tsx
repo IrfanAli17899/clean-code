@@ -1,37 +1,22 @@
-import axios from "axios";
-
+import { getUser } from "@/apis/users-api";
+import { formattedDate } from "@/utils/date-util";
 
 export async function generateMetadata() {
-  const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users/1`
-  );
+  const userResponse = await getUser("1");
 
   return {
-    title: `${response.data.name} | Home Page`,
+    title: `${userResponse.success ? userResponse.data?.name : 'Awesome App'} | Home Page`,
     description: "Home Page Description",
   }
 }
 
 export default async function Home() {
-  // [ISSUE]
-  // Hard Coded Base URL / Config Envs
-  // Not Centralized Library Initialization
-  // Duplicated API call logic in every component and Not Centralized API calls
-  // Duplicated date formatting logic in every component
-  const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users/1`
-  );
-
-  const userData = response.data;
-
-  const today = new Date();
-  const formattedDate = `${today.getDate()}-${
-    today.getMonth() + 1
-  }-${today.getFullYear()}`;
+  const userResponse = await getUser("1");
+  const date = formattedDate();
 
   return (
     <div>
-      User {userData.name} Data Fetched on {formattedDate}{" "}
+      User {userResponse.data?.name} Data Fetched on {date}{" "}
     </div>
   );
 }
