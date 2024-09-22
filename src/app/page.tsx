@@ -1,5 +1,17 @@
 import axios from "axios";
 
+
+export async function generateMetadata() {
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/users/1`
+  );
+
+  return {
+    title: `${response.data.name} | Home Page`,
+    description: "Home Page Description",
+  }
+}
+
 export default async function Home() {
   // [ISSUE]
   // Hard Coded Base URL / Config Envs
