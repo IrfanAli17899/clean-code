@@ -13,11 +13,6 @@ export async function generateMetadata() {
 }
 
 export default async function Todos() {
-  // [ISSUE]
-  // Hard Coded Base URL / Config Envs
-  // Not Centralized Library Initialization
-  // Duplicated API call logic in every component and Not Centralized API calls
-  // Duplicated date formatting logic in every component
   const response = await axios.get(
     `https://jsonplaceholder.typicode.com/users/1`
   );
