@@ -13,8 +13,7 @@ export async function generateMetadata() {
 }
 
 export default async function Todos() {
-  const userResponse = await getUser("1");
-  const todosResponse = await getTodos();
+  const [userResponse, todosResponse] = await Promise.all([getUser("1"), getTodos()]);
   const date = formattedDate();
   
   return (
